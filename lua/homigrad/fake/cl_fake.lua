@@ -231,7 +231,7 @@ CalcView = function(ply, origin, angles, fov, znear, zfar)
 		angEye = att_Ang
 	end
 
-	local cshs_fake = hg_cshs_fake:GetBool() or (ply.organism and ply.organism.otrub) or !hg.KeyDown(ply,IN_USE) or (follow:GetVelocity():Length() > 350 and !ply:InVehicle())
+	local cshs_fake = hg_cshs_fake:GetBool() or (ply.organism and ply.organism.otrub) or (!hg.KeyDown(ply, IN_USE) and !ply:InVehicle()) or (follow:GetVelocity():Length() > 350 and !ply:InVehicle())
 	
 	if IsValid(ply.OldRagdoll) then DrawPlayerRagdoll(follow, ply) end
 

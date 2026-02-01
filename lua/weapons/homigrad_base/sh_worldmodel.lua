@@ -213,7 +213,7 @@ function SWEP:PosAngChanges(ply, desiredPos, desiredAng, bNoAdditional, closeani
 		local _, ot = WorldToLocal(vector_origin, ang, vector_origin, att_Ang)
 		ot:Normalize()
 	
-		local use = hg.KeyDown(ply, IN_USE)
+		local use = hg.KeyDown(ply, IN_USE) or ply:InVehicle()
 		local fourtyfive = 45 * (use and 1 or 0)
 		ot[2] = math.Clamp(ot[2], -fourtyfive, fourtyfive)
 		ot[1] = math.Clamp(ot[1], -fourtyfive, fourtyfive)

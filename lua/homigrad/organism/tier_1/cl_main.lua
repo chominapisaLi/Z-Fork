@@ -884,6 +884,7 @@ hook.Add("Player-Ragdoll think", "organism-think-client-blood", function(ply, en
 		--local chest = ent:LookupBone("ValveBiped.Bip01_Spine1")
 		
 		if torso then
+			if ent:GetPos():Distance(lply:GetPos()) > 450 then return end
 			local sin = (math.sin(ent.pulsethink) + 1) * 0.5
 			local amt = 0.02 * sin * pulse / 70 * ((org.alive and !ent.headexploded) and 1 or 0)
 			
@@ -906,7 +907,6 @@ hook.Add("Player-Ragdoll think", "organism-think-client-blood", function(ply, en
 				if ent.armors then
 					muffed = ent.armors["face"] == "mask2" or ent.PlayerClassName == "Combine"
 				end
-				
 				ent:EmitSound("snds_jack_hmcd_breathing/" .. (ThatPlyIsFemale(ent) and "f" or "m") .. math.random(4) .. ".wav", min(heartbeat * 1.0 / ( muffed and 2.5 or 4), 45), math.random(95, 105) + (ply.PlayerClassName and ply.PlayerClassName == "furry" and 20 or 0), 0.5 * (((org.stamina and org.stamina[1] and org.stamina[1] < 160) or org.heartbeat > 140) and 1 or 0.05), CHAN_AUTO, 0, muffed and 16 or 0)
 			elseif org.breathed and sin >= 0.1 then
 				org.breathed = false
