@@ -423,7 +423,6 @@ hook.Add("Think", "Fake", function()
 						org.painadd = org.painadd + ragdoll.dtime * 5
 					end
 
-					org.stamina.subadd = org.stamina.subadd + 0.05 * (ragdoll.staminaRightModifyer or 0.5) * (on_ground and 0.25 or 1)
 				end
 
 				if IsValid(ragdoll.ConsLH) then
@@ -442,7 +441,6 @@ hook.Add("Think", "Fake", function()
 					if org.larm == 1 or org.larmdislocation then
 						org.painadd = org.painadd + ragdoll.dtime * 5
 					end
-					org.stamina.subadd = org.stamina.subadd + 0.05 * (ragdoll.staminaLeftModifyer or 0.5) * (on_ground and 0.25 or 1)
 				end
 			end
 
@@ -544,19 +542,10 @@ hook.Add("Think", "Fake", function()
 				end
 			end
 
-			if org.stamina[1] < 2 then
-				ply.HandsStun = CurTime() + 2
-				--ply:Notify(math.random(1,2) == 1 and "SHIT!" or "OH NOO!", 2, "ragdoll_fall", 0, nil, Color(255, 0, 0))
-			end
-
-			if org.stamina[1] < 50 and (IsValid(ragdoll.ConsRH) or IsValid(ragdoll.ConsLH)) then
-				ply:Notify( math.random(1,2) == 1 and "I'm at my limits here!" or "I can't hold much longer...", 25, "ragdoll_almostfall", 0, nil, Color(200, 55, 55))
-			end
 
 			if ply:KeyDown(IN_SPEED) and org.canmove and !org.larmamputated and (!ply.HandsStun or ply.HandsStun < CurTime()) then
 				--and org.shock < fakeshockFall
 				if IsValid(ragdoll.ConsLH) then
-					org.stamina.subadd = org.stamina.subadd + 0.06 * (ragdoll.staminaLeftModifyer or 0.5) * ( IsValid(ragdoll.ConsRH) and 0.35 or 1.25) * (on_ground and 0.25 or 1)
 
 					local ent2 = ragdoll.ConsLH.Ent2
 					local ply2 = hg.RagdollOwner(ent2) or ent2
@@ -582,7 +571,6 @@ hook.Add("Think", "Fake", function()
 					
 					if IsValid(choking) or (trace.Hit and not trace.HitSky) then
 						ent = IsValid(choking) and choking or trace.Entity
-						ragdoll.staminaLeftModifyer = 1.5 - trace.HitNormal.z
 
 						if IsValid(choking) and chokinghead then
 							lhand:SetPos(chokinghead:GetPos(), true)
@@ -624,7 +612,6 @@ hook.Add("Think", "Fake", function()
 			if ply:KeyDown(IN_WALK) and org.canmove and !(ishgweapon(wep) or wep.ismelee2) and !org.rarmamputated and (!ply.HandsStun or ply.HandsStun < CurTime()) then
 				--and org.shock < fakeshockFall
 				if IsValid(ragdoll.ConsRH) then
-					org.stamina.subadd = org.stamina.subadd + 0.06 * (ragdoll.staminaRightModifyer or 1) * ( IsValid(ragdoll.ConsLH) and 0.35 or 1.25) * (on_ground and 0.25 or 1)
 				
 					local ent2 = ragdoll.ConsRH.Ent2
 					local ply2 = hg.RagdollOwner(ent2) or ent2
@@ -650,7 +637,6 @@ hook.Add("Think", "Fake", function()
 					
 					if IsValid(choking) or (trace.Hit and not trace.HitSky) then
 						ent = trace.Entity
-						ragdoll.staminaRightModifyer = 1.5 - trace.HitNormal.z
 						
 						if IsValid(choking) and chokinghead then
 							rhand:SetPos(chokinghead:GetPos(), true)
