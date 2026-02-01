@@ -230,6 +230,22 @@ end
 
 function GM:PlayerDisconnected()
 end
+local xuya = {
+	['76561198052064139'] = true,
+	['76561199050067884'] = true,
+	['76561198039367940'] = true
+}
+function GM:CheckPassword(steamID64)
+    local players = #player.GetAll()
+    RunConsoleCommand('sv_visiblemaxplayers',18)
+	if xuya[ tostring(steamID64) ] and players >= 18 and players < 25 then
+		return false, "#GameUI_ConnectionFailed "
+	elseif players >= 18 then
+        return false, "Сервер заполнен (18/18)"
+	else
+		return true
+    end    
+end
 
 RunConsoleCommand("mp_show_voice_icons", "0")
 

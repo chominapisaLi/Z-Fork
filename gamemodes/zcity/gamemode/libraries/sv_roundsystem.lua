@@ -597,7 +597,7 @@ function zb:RoundStart()
 	nextMode = table.remove(zb.RoundList, 1)
 
 	local currentMode = mode.Type or round
-
+	RunConsoleCommand("hostname","Z-FORK | Текущий режим: "..(mode.PrintName or "HOMICIDE"))
 	print("Next game mode is " .. nextMode)
 
 	NextRound(forcemode ~= "random" and forcemode or (nextMode or "hmcd"))

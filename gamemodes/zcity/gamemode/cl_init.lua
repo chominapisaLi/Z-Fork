@@ -591,7 +591,7 @@ function GM:ScoreboardShow()
 		end 
 	end
 
-	local ServerName = GetHostName() or "ZCity | Developer Server | #01"
+	local ServerName = "Z-FORK"
 	local tick
 	scoreBoardMenu.PaintOver = function(self,w,h)
 		surface.SetDrawColor( 255, 0, 0, 128)

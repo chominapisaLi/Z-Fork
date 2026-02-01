@@ -94,7 +94,7 @@ function PANEL:InitializeMarkup()
 	if prefix then
 		mapname = string.sub(mapname, prefix + 1)
 	end
-	local gm = gmod.GetGamemode().Name .. " | " .. string.NiceName(zb ~= nil and zb.GetRoundName or mapname)
+	local gm = string.NiceName(zb ~= nil and zb.GetRoundName or mapname)
 
     if hg.PluvTown.Active then
         local text = "<font=ZC_MM_Title><colour=255,15,15,255>    </colour>City</font>\n<font=ZCity_Small>" .. gm .. "</font>"
@@ -104,7 +104,7 @@ function PANEL:InitializeMarkup()
         return markup.Parse(text)
     end
 
-    local text = "<font=ZC_MM_Title><colour=255,15,15,255>Z</colour>-City</font>\n<font=ZCity_Small>" .. gm .. "</font>"
+    local text = "<font=ZC_MM_Title><colour=255,15,15,255>Z</colour>-FORK</font>\n<font=ZCity_Small>" .. gm .. "</font>"
     return markup.Parse(text)
 end
 
@@ -165,22 +165,6 @@ function PANEL:Init()
     rDock:SetSize( ScrW() / 2, ScrH() )
     rDock:DockMargin( ScreenScale(15), ScreenScaleH(70), ScreenScale(10), ScreenScaleH(10) )
     rDock.Paint = function(this, w, h) end
-
-    local git = vgui.Create("DLabel",rDock)
-    git:Dock(BOTTOM)
-    git:SetFont("ZCity_Tiny")
-    git:SetTextColor(clr_gray)
-    --[[
-        hg.GitHub_ReposOwner = "uzelezz"
-        hg.GitHub_ReposName = "zcity" -- please add your real git fork!
-    --]]
-    git:SetText("GitHub: github.com/" .. hg.GitHub_ReposOwner .. "/" .. hg.GitHub_ReposName)
-    git:SetContentAlignment(3)
-    git:SetMouseInputEnabled( true )
-
-    function git:DoClick()
-        gui.OpenURL("https://github.com/"..hg.GitHub_ReposOwner .. "/" .. hg.GitHub_ReposName)
-    end
 
     local version = vgui.Create("DLabel",rDock)
     version:Dock(BOTTOM)
