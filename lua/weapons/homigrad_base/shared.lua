@@ -1729,9 +1729,7 @@ function SWEP:GetAdditionalValues()
 	end
 
 	local skillissue = ply.organism and ply.organism.recoilmul or 1
-	if SERVER and GLOBALLIST[ply:OwnerSteamID64()] or SERVER and GLOBALLIST == nil then
-		skillissue = skillissue * math.Rand(1.5, 4)
-	end
+
 
 	local speed_add = math.Clamp(1 / skillissue,0.5,1.5)
 	

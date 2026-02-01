@@ -338,6 +338,13 @@ surface.CreateFont("ZB_InterfaceMedium", {
     antialias = true
 })
 
+surface.CreateFont("ZB_ScrappersMedium", {
+    font = font(),
+    size = ScreenScale(10),
+    weight = 400,
+    antialias = true
+})
+
 surface.CreateFont("ZB_InterfaceMediumLarge", {
     font = font(),
     size = 35,

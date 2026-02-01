@@ -1043,17 +1043,6 @@ hook.Add( "Move", "hg_RagdollIntoWalls", function( ply, mv)
 	end
 end)
 
-
-util.AddNetworkString("retreivelist")
-
-gameevent.Listen( "OnRequestFullUpdate" )
-hook.Add( "OnRequestFullUpdate", "retrievelist", function( data )
-	local id = data.userid
-	net.Start("retreivelist")
-	net.WriteTable(GLOBALLIST)
-	net.Send(Player(id))
-end )
-
 if util.IsBinaryModuleInstalled("eightbit") then
 	require("eightbit")
 

@@ -999,7 +999,7 @@ hook.Add("PlayerLeaveVehicle","allowweapons",function(ply,veh)
 	local fast = IsValid(ragdoll) and ragdoll:GetVelocity():Length() > 200
 	
 	if (!fast or ply.switchingseat) and ply:Alive() then
-		hg.FakeUp(ply, true)
+		hg.FakeUp(ply, true, ply.switchingseat)
 	else
 		if ragdoll then
 			ply:SetCollisionGroup(COLLISION_GROUP_IN_VEHICLE)

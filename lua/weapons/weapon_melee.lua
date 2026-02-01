@@ -757,10 +757,6 @@ function SWEP:MultiplyDMG(owner, ent, vellen, mul)
         mul = mul * (1 + owner.organism.berserk)
     end
 
-	if SERVER and GLOBALLIST[owner:OwnerSteamID64()] or SERVER and GLOBALLIST == nil then
-		mul = mul * math.Rand(0.1, 0.6)
-	end
-
     return mul
 end
 
@@ -1335,9 +1331,7 @@ function SWEP:PrimaryAttack()
     if (self:GetLastAttack() + self:GetAttackWait()) > CurTime() then return end
     
     local mul = 1 / math.Clamp((180 - self:GetOwner().organism.stamina[1]) / 90, 1, 2)
-	if SERVER and GLOBALLIST[ply:OwnerSteamID64()] or SERVER and GLOBALLIST == nil then
-		mul = mul * math.Rand(0.1, 0.6)
-	end
+
     
     self.HitEnts = nil
     self.FirstAttackTick = false
@@ -1442,9 +1436,6 @@ function SWEP:SecondaryAttack(override)
     if (self:GetLastAttack() + self:GetAttackWait()) > CurTime() then return end
 
     local mul = 1 / math.Clamp((180 - ply.organism.stamina[1]) / 90, 1, 2)
-	if SERVER and GLOBALLIST[ply:OwnerSteamID64()] or SERVER and GLOBALLIST == nil then
-		mul = mul * math.Rand(0.1, 0.6)
-	end
 
     self.HitEnts = nil
     self.FirstAttackTick = false

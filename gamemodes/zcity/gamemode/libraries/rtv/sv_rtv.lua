@@ -156,11 +156,7 @@ net.Receive("ZB_RockTheVote_vote", function(len, ply)
     local map = net.ReadString()
     playervote[playerIdx] = map
 
-    if ply:HasPurchase("zpremium") then
-        playerVoteWeight[playerIdx] = 2
-    else
-        playerVoteWeight[playerIdx] = 1
-    end
+    playerVoteWeight[playerIdx] = 1
     
     votes[map] = (votes[map] or 0) + playerVoteWeight[playerIdx]
 
