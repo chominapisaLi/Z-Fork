@@ -535,11 +535,12 @@ function SWEP:PlayAnim(anim,time,cycling,callbackFuncName,reverse,sendtoclient)
 	end
     self.tries = 10
 
-    if self:GetWM():GetModel() ~= self.WorldModelReal then self:GetWM():SetModel(self.WorldModelReal) end
+    local mdl = self:GetWM()
+    if mdl:GetModel() ~= self.WorldModelReal then mdl:SetModel(self.WorldModelReal) end
     local tAnim = self.AnimList[anim] or {}
     self.seq = tAnim and tAnim[1] or anim
     self.anim = anim
-    self:GetWM():SetSequence(tAnim[1] or anim)
+    mdl:SetSequence(tAnim[1] or anim)
     self.animtime = CurTime() + ( time or tAnim[2] or 1)
     self.animspeed = time or tAnim[2] or 1
     self.cycling = cycling or (tAnim[3] ~= nil and tAnim[3])
@@ -560,7 +561,7 @@ function SWEP:PlayAnim(anim,time,cycling,callbackFuncName,reverse,sendtoclient)
 			timer.Create(TimerName, Time * k, 1, function()
 				if not IsValid(self) then return end
 				if seq != self.seq then self:VM_RemoveAllEvents() end
-				v(self)
+				v(self, mdl)
 				self.VM_TimerEvents[TimerID] = nil
 			end)
 

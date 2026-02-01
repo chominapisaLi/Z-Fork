@@ -80,11 +80,12 @@ SWEP.Primary.Sound = {"zcitysnd/sound/weapons/firearms/shtg_remington870/remingt
 SWEP.SupressedSound = {"toz_shotgun/toz_suppressed_fp.wav", 65, 90, 100}
 SWEP.availableAttachments = {
 	barrel = {
-		[1] = {"supressor5", Vector(8.5,0,0), {}},
+		["mount"] = Vector(-1.6,0,0),
+		[1] = {"supressor5", Vector(0,0,0), {}},
 	},
 	sight = {
 		["mountType"] = "picatinny",
-		["mount"] = Vector(-18, 1.15, 0),
+		["mount"] = Vector(-22.5, 0.75, 0.1),
 	},
 }
 
@@ -131,13 +132,19 @@ SWEP.AnimList = {
 }
 SWEP.AnimsEvents = {
 	["base_reload_insert"] = {
-		[0.0] = function(self)
+		[0.0] = function(self, mdl)
 			self:EmitSound("weapons/arccw_ud/870/shell-insert-0"..math.random(1,3)..".ogg")
+			mdl:ManipulateBoneScale(mdl:LookupBone("Shell"), Vector(1, 1, 1))
 			--
 			--self:GetWM():ManipulateBoneScale(47, vector_full)
 		end,
-		[0.8] = function(self)
+		[0.8] = function(self, mdl)
 			--self:GetWM():ManipulateBoneScale(47, vector_origin)
+		end,
+	},
+	["base_reload_end"] = {
+		[0.0] = function(self, mdl)
+			mdl:ManipulateBoneScale(mdl:LookupBone("Shell"), vector_origin)
 		end,
 	},
 	["base_fire_cock_2"] = {
@@ -197,6 +204,10 @@ function SWEP:DrawPost() --!! оно на груди не видно а еще �
 		self.BMerge:DrawModel()
 	end
 end]]
+
+function SWEP:ModelCreated(mdl)
+	mdl:ManipulateBoneScale(mdl:LookupBone("Shell"), vector_origin)
+end
 
 function SWEP:AnimationPost()
 	local animpos = math.Clamp(self:GetAnimPos_Draw(CurTime()),0,1)
